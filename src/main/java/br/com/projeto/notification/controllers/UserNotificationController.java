@@ -37,7 +37,7 @@ public class UserNotificationController {
                                                      @RequestBody @Valid NotificationDto notificationDto){
         Optional<NotificationModel> notificationModelOptional =
                 notificationService.findByNotificationIdAndUserId(notificationId, userId);
-        if(notificationModelOptional.isEmpty()){
+        if(!notificationModelOptional.isPresent()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Notification not found!");
         }
         notificationModelOptional.get().setNotificationStatus(notificationDto.getNotificationStatus());
